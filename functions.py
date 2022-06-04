@@ -1,7 +1,5 @@
 import numpy as np 
-import matplotlib.pyplot as plt
 from skimage.transform import resize,rotate
-from skimage.data import shepp_logan_phantom
 
 def circle_mask(y,x):
     '''
@@ -77,7 +75,7 @@ def iradon_transform(sinogram,n_angles):
     fft_filter[1::2] = -1/(np.pi*win)**2
     ramp_filter = np.real(np.fft.fft(fft_filter))*2
     ### FILTERING AND IRADON
-    out = np.zeros((len(sinogram), n_angles))
+    out = np.zeros((len(sinogram), len(sinogram)))
     min_angle = 180/2/n_angles
     max_angle = 180-180/2/n_angles
     theta = np.linspace(min_angle,max_angle,n_angles)
